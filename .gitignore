@@ -1,6 +1,7 @@
-components/BorderElement
-components/CloseButton
-components/MaximiseButton
-components/MinimiseButton
-components/TitleBar
-components/WindowElement
+js/components/BorderElement
+js/components/CloseButton
+js/components/MaximiseButton
+js/components/MinimiseButton
+js/components/TitleBar
+js/components/WindowElement
+node_modules/

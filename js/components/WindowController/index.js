@@ -1,3 +1,4 @@
+import controllerTemplate from './controller-template'
 import ButtonTypeIdentifier from './ButtonTypeIdentifier'
 
 window.customElements.define('window-controller',
@@ -8,6 +9,7 @@ class WindowController extends window.HTMLElement {
   constructor () {
     super()
     this.attachShadow({ mode: 'open' })
+    this.shadowRoot.innerHTML = controllerTemplate
     this.addEventListener('keydown', this.handleKey)
   }
 
