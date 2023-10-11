@@ -8,9 +8,14 @@ class WindowController extends window.HTMLElement {
 
   constructor () {
     super()
-    this.attachShadow({ mode: 'open' })
-    this.shadowRoot.innerHTML = controllerTemplate
+    this.innerHTML = controllerTemplate
+    this.addEventListener('activateWindow', this.setActiveWindow)
     this.addEventListener('keydown', this.handleKey)
+  }
+
+  setActiveWindow = e => {
+    this.#activeWindow = e.target
+    console.log(this.#activeWindow)
   }
 
   handleKey = e => {
