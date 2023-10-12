@@ -1,6 +1,5 @@
 export default class ButtonTypeIdentifier {
-  static isArrowKey (keyboardEvent) {
-    const key = keyboardEvent.which
-    return key >= 37 && key <= 40
+  static isArrow (keyNumber) {
+    return keyNumber >= 37 && keyNumber <= 40
   }
 }

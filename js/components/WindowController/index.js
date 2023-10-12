@@ -10,16 +10,16 @@ class WindowController extends window.HTMLElement {
     super()
     this.innerHTML = controllerTemplate
     this.addEventListener('activateWindow', this.setActiveWindow)
-    this.addEventListener('keydown', this.handleKey)
+    document.addEventListener('keydown', this.handleKey)
   }
 
   setActiveWindow = e => {
     this.#activeWindow = e.target
-    console.log(this.#activeWindow)
   }
 
   handleKey = e => {
-    if (ButtonTypeIdentifier.isArrow(e.which)) {
+    const keyNumber = e.which
+    if (ButtonTypeIdentifier.isArrow(keyNumber)) {
       if (e.ctrlKey && !e.altKey) {
         this.handleCtrlCombinatedArrow(e)
       } else if (!e.ctrlKey && e.altKey) {
@@ -32,9 +32,17 @@ class WindowController extends window.HTMLElement {
 
   handleAltCombinatedArrow = e => {
     switch (e.key) {
+      case 'ArrowLeft':
+        this.#activeWindow.moveHorizontally(-this.#movement)
+        break
       case 'ArrowUp':
         this.#activeWindow.moveVertically(-this.#movement)
         break
+      case 'ArrowRight':
+        this.#activeWindow.moveHorizontally(this.#movement)
+        break
+      case 'ArrowDown':
+        this.#activeWindow.moveVertically(this.#movement)
     }
   }
 })
