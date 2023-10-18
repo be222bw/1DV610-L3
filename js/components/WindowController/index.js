@@ -45,4 +45,12 @@ class WindowController extends window.HTMLElement {
         this.#activeWindow.moveVertically(this.#movement)
     }
   }
+
+  handleCtrlCombinatedArrow = e => {
+    const side = ButtonTypeIdentifier.getSideByArrow(e.which)
+    const rect = this.#activeWindow.getBoundingClientRect()
+    const oldSideValue = rect[side]
+    const sign = ButtonTypeIdentifier.getSignForMovementBySide(side)
+    this.#activeWindow.setSide(side, sign * this.#movement + oldSideValue)
+  }
 })
