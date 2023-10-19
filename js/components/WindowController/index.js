@@ -20,14 +20,23 @@ class WindowController extends window.HTMLElement {
   handleKey = e => {
     const keyNumber = e.which
     if (ButtonTypeIdentifier.isArrow(keyNumber)) {
-      if (e.ctrlKey && !e.altKey) {
+      if (e.ctrlKey && e.shiftKey) {
+        this.handleCtrlShiftCombinatedArrow(e)
+      } else if (e.ctrlKey && !e.shiftKey) {
         this.handleCtrlCombinatedArrow(e)
       } else if (!e.ctrlKey && e.altKey) {
         this.handleAltCombinatedArrow(e)
-      } else if (e.altKey && e.ctrlKey) {
-        this.handleCtrlAltCombinatedArrow(e)
       }
     }
+  }
+
+  handleCtrlShiftCombinatedArrow = e => {
+    const rect = this.#activeWindow.getBoundingClientRect()
+    const side = ButtonTypeIdentifier.getSideOppositeArrow(e.which)
+    const oldSideValue = rect[side]
+    const sign = ButtonTypeIdentifier.getSignForMovementBySide(side)
+    this.#activeWindow.setSide(side,
+      oldSideValue - sign * this.#movement)
   }
 
   handleAltCombinatedArrow = e => {
@@ -46,11 +55,12 @@ class WindowController extends window.HTMLElement {
     }
   }
 
+
   handleCtrlCombinatedArrow = e => {
-    const side = ButtonTypeIdentifier.getSideByArrow(e.which)
     const rect = this.#activeWindow.getBoundingClientRect()
+    const side = ButtonTypeIdentifier.getSideByArrow(e.which)
     const oldSideValue = rect[side]
     const sign = ButtonTypeIdentifier.getSignForMovementBySide(side)
-    this.#activeWindow.setSide(side, sign * this.#movement + oldSideValue)
+    this.#activeWindow.setSide(side, oldSideValue + sign * this.#movement)
   }
 })

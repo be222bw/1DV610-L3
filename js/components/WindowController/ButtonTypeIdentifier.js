@@ -3,9 +3,14 @@ export default class ButtonTypeIdentifier {
     return keyNumber >= 37 && keyNumber <= 40
   }
 
-  static getSideByArrow (keynumber) {
+  static getSideByArrow (keyNumber) {
     const sidesInNumericalOrder = [ 'left', 'top', 'right', 'bottom' ]
-    return sidesInNumericalOrder[keynumber - 37]
+    return sidesInNumericalOrder[keyNumber - 37]
+  }
+
+  static getSideOppositeArrow (keyNumber) {
+    const oppositeSidesInNumericalOrder = [ 'right', 'bottom', 'left', 'top' ]
+    return oppositeSidesInNumericalOrder[keyNumber - 37]
   }
 
   static getSignForMovementBySide (side) {
