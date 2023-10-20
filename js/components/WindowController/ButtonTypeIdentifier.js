@@ -3,6 +3,10 @@ export default class ButtonTypeIdentifier {
     return keyNumber >= 37 && keyNumber <= 40
   }
 
+  static isDigit (keyNumber) {
+    return keyNumber >= 48 && keyNumber <= 57
+  }
+
   static getSideByArrow (keyNumber) {
     const sidesInNumericalOrder = [ 'left', 'top', 'right', 'bottom' ]
     return sidesInNumericalOrder[keyNumber - 37]

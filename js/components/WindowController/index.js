@@ -19,6 +19,7 @@ class WindowController extends window.HTMLElement {
 
   handleKey = e => {
     const keyNumber = e.which
+    const key = e.key
     if (ButtonTypeIdentifier.isArrow(keyNumber)) {
       if (e.ctrlKey && e.shiftKey) {
         this.handleCtrlShiftCombinatedArrow(e)
@@ -26,6 +27,15 @@ class WindowController extends window.HTMLElement {
         this.handleCtrlCombinatedArrow(e)
       } else if (!e.ctrlKey && e.altKey) {
         this.handleAltCombinatedArrow(e)
+      }
+    } else if (ButtonTypeIdentifier.isDigit(keyNumber)) {
+      if (e.altKey) {
+        switch (key) {
+          case '4':
+            const closeWindow = new CustomEvent('closeWindow',
+              { bubbles: true, composed: true })
+            this.#activeWindow.dispatchEvent(closeWindow)
+        }
       }
     }
   }
