@@ -1,5 +1,6 @@
 import controllerTemplate from './controller-template'
 import ButtonTypeIdentifier from './ButtonTypeIdentifier'
+import ModifierButtonAndArrowCombinations from './ModifierButtonCombinations'
 
 window.customElements.define('window-controller',
 class WindowController extends window.HTMLElement {
@@ -21,13 +22,10 @@ class WindowController extends window.HTMLElement {
     const keyNumber = e.which
     const key = e.key
     if (ButtonTypeIdentifier.isArrow(keyNumber)) {
-      if (e.ctrlKey && e.shiftKey) {
-        this.handleCtrlShiftCombinatedArrow(e)
-      } else if (e.ctrlKey && !e.shiftKey) {
-        this.handleCtrlCombinatedArrow(e)
-      } else if (!e.ctrlKey && e.altKey) {
-        this.handleAltCombinatedArrow(e)
-      }
+      const modifierButtonAndArrowCombination =
+        ModifierButtonAndArrowCombinations.generate(e)
+      modifierButtonAndArrowCombination.exec(e,
+        this.#activeWindow, this.#movement)
     } else if (ButtonTypeIdentifier.isDigit(keyNumber)) {
       if (e.altKey) {
         switch (key) {
@@ -38,39 +36,5 @@ class WindowController extends window.HTMLElement {
         }
       }
     }
-  }
-
-  handleCtrlShiftCombinatedArrow = e => {
-    const rect = this.#activeWindow.getBoundingClientRect()
-    const side = ButtonTypeIdentifier.getSideOppositeArrow(e.which)
-    const oldSideValue = rect[side]
-    const sign = ButtonTypeIdentifier.getSignForMovementBySide(side)
-    this.#activeWindow.setSide(side,
-      oldSideValue - sign * this.#movement)
-  }
-
-  handleAltCombinatedArrow = e => {
-    switch (e.key) {
-      case 'ArrowLeft':
-        this.#activeWindow.moveHorizontally(-this.#movement)
-        break
-      case 'ArrowUp':
-        this.#activeWindow.moveVertically(-this.#movement)
-        break
-      case 'ArrowRight':
-        this.#activeWindow.moveHorizontally(this.#movement)
-        break
-      case 'ArrowDown':
-        this.#activeWindow.moveVertically(this.#movement)
-    }
-  }
-
-
-  handleCtrlCombinatedArrow = e => {
-    const rect = this.#activeWindow.getBoundingClientRect()
-    const side = ButtonTypeIdentifier.getSideByArrow(e.which)
-    const oldSideValue = rect[side]
-    const sign = ButtonTypeIdentifier.getSignForMovementBySide(side)
-    this.#activeWindow.setSide(side, oldSideValue + sign * this.#movement)
   }
 })
