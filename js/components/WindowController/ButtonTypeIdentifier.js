@@ -7,6 +7,10 @@ export default class ButtonTypeIdentifier {
     return keyNumber >= 48 && keyNumber <= 57
   }
 
+  static isISOBasicLatinLetter (keyNumber) {
+    return keyNumber >= 65 && keyNumber <= 90
+  }
+
   static getSideByArrow (keyNumber) {
     const sidesInNumericalOrder = [ 'left', 'top', 'right', 'bottom' ]
     return sidesInNumericalOrder[keyNumber - 37]

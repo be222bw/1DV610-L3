@@ -1,6 +1,7 @@
 import controllerTemplate from './controller-template'
 import ButtonTypeIdentifier from './ButtonTypeIdentifier'
 import ModifierButtonAndArrowCombinations from './ModifierButtonCombinations'
+import ModifierButtonCombinatedLetter from './ModifierButtonCombinatedLetter'
 
 window.customElements.define('window-controller',
 class WindowController extends window.HTMLElement {
@@ -24,17 +25,13 @@ class WindowController extends window.HTMLElement {
     if (ButtonTypeIdentifier.isArrow(keyNumber)) {
       const modifierButtonAndArrowCombination =
         ModifierButtonAndArrowCombinations.generate(e)
-      modifierButtonAndArrowCombination.exec(e,
+      modifierButtonAndArrowCombination?.exec(e,
         this.#activeWindow, this.#movement)
-    } else if (ButtonTypeIdentifier.isDigit(keyNumber)) {
-      if (e.altKey) {
-        switch (key) {
-          case '4':
-            const closeWindow = new CustomEvent('closeWindow',
-              { bubbles: true, composed: true })
-            this.#activeWindow.dispatchEvent(closeWindow)
+    } else if (ButtonTypeIdentifier.isISOBasicLatinLetter(keyNumber)) {
+        if (e.altKey) {
+          const event = ModifierButtonCombinatedLetter.generate(key)
+          this.#activeWindow.dispatchEvent(event)
         }
       }
     }
-  }
-})
+  })
