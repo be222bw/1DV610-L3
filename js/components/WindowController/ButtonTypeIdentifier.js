@@ -7,8 +7,8 @@ export default class ButtonTypeIdentifier {
     return keyNumber >= 48 && keyNumber <= 57
   }
 
-  static isISOBasicLatinLetter (keyNumber) {
-    return keyNumber >= 65 && keyNumber <= 90
+  static isAltCombinatedReservedLetter (event) {
+    return event.altKey && ['m', 'M', 'c'].includes(event.key)
   }
 
   static getSideByArrow (keyNumber) {

@@ -27,11 +27,9 @@ class WindowController extends window.HTMLElement {
         ModifierButtonAndArrowCombinations.generate(e)
       modifierButtonAndArrowCombination?.exec(e,
         this.#activeWindow, this.#movement)
-    } else if (ButtonTypeIdentifier.isISOBasicLatinLetter(keyNumber)) {
-        if (e.altKey) {
-          const event = ModifierButtonCombinatedLetter.generate(key)
-          this.#activeWindow.dispatchEvent(event)
-        }
+    } else if (ButtonTypeIdentifier.isAltCombinatedReservedLetter(e)) {
+        const event = ModifierButtonCombinatedLetter.generateEvent(key)
+        this.#activeWindow?.dispatchEvent(event)
       }
     }
   })

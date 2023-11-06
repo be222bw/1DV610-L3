@@ -1,5 +1,5 @@
 export default class ModifierButtonCombinatedLetter {
-  static generate (key) {
+  static generateEvent (key) {
     let event
     switch (key) {
       case 'm':
@@ -10,7 +10,7 @@ export default class ModifierButtonCombinatedLetter {
         event = new CustomEvent('maximiseWindow',
         { bubbles: true, composed: true })
         break
-      case 'C':
+      case 'c':
         event = new CustomEvent('closeWindow',
               { bubbles: true, composed: true })
     }
