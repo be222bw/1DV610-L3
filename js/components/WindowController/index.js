@@ -6,7 +6,6 @@ import ModifierButtonCombinatedLetter from './ModifierButtonCombinatedLetter'
 window.customElements.define('window-controller',
 class WindowController extends window.HTMLElement {
   #activeWindow
-  #movement = 5
 
   constructor () {
     super()
@@ -26,7 +25,7 @@ class WindowController extends window.HTMLElement {
       const modifierButtonAndArrowCombination =
         ModifierButtonAndArrowCombinations.generate(e)
       modifierButtonAndArrowCombination?.exec(e,
-        this.#activeWindow, this.#movement)
+        this.#activeWindow)
     } else if (ButtonTypeIdentifier.isAltCombinatedReservedLetter(e)) {
         const event = ModifierButtonCombinatedLetter.generateEvent(key)
         this.#activeWindow?.dispatchEvent(event)

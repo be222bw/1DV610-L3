@@ -1,11 +1,12 @@
+import ModifierButtonCombination from './ModifierButtonCombination'
 import ButtonTypeIdentifier from '../ButtonTypeIdentifier'
-export default class CtrlShiftCombinatedArrow {
-  exec (e, activeWindow, movement) {
+export default class CtrlShiftCombinatedArrow extends ModifierButtonCombination {
+  exec (e, activeWindow) {
     const rect = activeWindow.getBoundingClientRect()
     const side = ButtonTypeIdentifier.getSideOppositeArrow(e.which)
     const oldSideValue = rect[side]
     const sign = ButtonTypeIdentifier.getSignForMovementBySide(side)
     activeWindow.setSide(side,
-      oldSideValue - sign * movement)
+      oldSideValue - sign * this.movement)
   }
 }
