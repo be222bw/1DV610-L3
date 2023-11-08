@@ -29,6 +29,6 @@ class WindowController extends window.HTMLElement {
     } else if (ButtonTypeIdentifier.isAltCombinatedReservedLetter(e)) {
         const event = ModifierButtonCombinatedLetter.generateEvent(key)
         this.#activeWindow?.dispatchEvent(event)
-      }
     }
-  })
+  }
+})
