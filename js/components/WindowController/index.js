@@ -1,5 +1,5 @@
 import controllerTemplate from './controller-template'
-import ButtonTypeIdentifier from './ButtonTypeIdentifier'
+import ButtonTypeAndSideIdentifier from './ButtonTypeAndSideIdentifier'
 import ModifierButtonAndArrowCombinations from './ModifierButtonCombinations'
 import ModifierButtonCombinatedLetter from './ModifierButtonCombinatedLetter'
 
@@ -21,12 +21,12 @@ class WindowController extends window.HTMLElement {
   handleKey = e => {
     const keyNumber = e.which
     const key = e.key
-    if (ButtonTypeIdentifier.isArrow(keyNumber)) {
+    if (ButtonTypeAndSideIdentifier.isArrow(keyNumber)) {
       const modifierButtonAndArrowCombination =
         ModifierButtonAndArrowCombinations.generate(e)
       modifierButtonAndArrowCombination?.exec(e,
         this.#activeWindow)
-    } else if (ButtonTypeIdentifier.isAltCombinatedReservedLetter(e)) {
+    } else if (ButtonTypeAndSideIdentifier.isAltCombinatedReservedLetter(e)) {
         const event = ModifierButtonCombinatedLetter.generateEvent(key)
         this.#activeWindow?.dispatchEvent(event)
     }

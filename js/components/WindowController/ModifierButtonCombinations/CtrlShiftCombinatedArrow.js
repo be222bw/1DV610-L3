@@ -1,5 +1,5 @@
 import ModifierButtonCombination from './ModifierButtonCombination'
-import ButtonTypeIdentifier from '../ButtonTypeIdentifier'
+import ButtonTypeIdentifier from '../ButtonTypeAndSideIdentifier'
 export default class CtrlShiftCombinatedArrow extends ModifierButtonCombination {
   exec (e, activeWindow) {
     const rect = activeWindow.getBoundingClientRect()

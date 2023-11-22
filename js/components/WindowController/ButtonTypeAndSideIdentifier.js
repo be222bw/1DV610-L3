@@ -1,4 +1,4 @@
-export default class ButtonTypeIdentifier {
+export default class ButtonTypeAndSideIdentifier {
   static isArrow (keyNumber) {
     return keyNumber >= 37 && keyNumber <= 40
   }
