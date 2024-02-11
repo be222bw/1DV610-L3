@@ -1,154 +1,43 @@
-## Checklista
-  - [x] Jag har skrivit all kod och reflektioner själv. Jag har inte använt mig av andras kod för att lösa uppgiften.
-  - [x] Mina testresultat är skrivna utifrån utförd testning ( och inte teoretiskt: "det bör fungera" :) )
-  - [x] Koden är objektorienterad
-  - [x] Jag har skrivit en modul som riktar sig till programmerare
+# Release
 
-## Egenskattning och mål
-  - [ ] Jag är inte klar eftersom jag vet att jag saknar något. (Då skall du inte lämna in! Lämna då istället in på restlaboration.)
-  - [x] Jag eftersträvar med denna inlämning godkänt betyg (E-D)
-    - [x] De flesta testfall fungerar
-    - [x] Koden är förberedd på Återanvändning
-    - [x] All kod samt historik finns i git 
-    - [x] Kodkvaliterskraven är ifyllda
-    - [x] Reflektion är skriven utifrån bokens kapitel 
-  - [x] Jag eftersträvar med denna inlämning högre betyg (C-B) och anser mig uppfylla alla extra krav för detta. 
-    - [x] Samtliga testfall är skrivna    
-    - [ ] Testfall är automatiserade
-    - [x] Det finns en tydlig beskrivning i hur modulen skall användas (i git)
-    - [x] Kodkvalitetskraven är varierade 
-  - [ ] Jag eftersträvar med denna inlämning högsta betyg (A) 
+## Chapter 2
 
-Förtydligande: Examinator kommer sätta betyg oberoende på vad ni anser. 
+The classes, fields and methods all have meaningful names, and they are **intention-revealing** to a large degree. A single-letter loop counter might have slipped in as a local variable, though.
 
-## Återanvändning
-This is a controller of the Window-element module.
+The class and field names are all **noun phrases**, while the method names are **verb phrases**. The names tend to be pretty long, and they are **searchable**. **Mental mapping** has been avoided.
 
-## Beskrivning av min kod
-This code is taking advantage of the module created in the earlier assignment. It is a controller in the Model-View-Controller architecture. It makes the module (a custom HTML window representing a computer window) controllable with the keyboard, i.e. the window can be moved, resized, closed, minimised and maximised with the keyboard.
+## Chapter 3
 
-Because the HTML element is used in a browser context, some of the keyboard shortcuts are already in use by the operating system, so the shortcuts used by the controller may seem a little peculiar.
+The methods are generally pretty **small**, at least not larger than can be seen on a regular computer monitor without scrolling. **Indentation** has been used for introducing every new **block**, and even under every case in a switch statement. The methods generally only **do one thing**, although some methods have to pick an algoritm that suits the combination of keys pressed, which makes the code a little longer. The methods do not mix **levels of abstraction**, but instead has the really low-level stuff in a particular class with static methods.
 
-## Hur jag testat
-Most of the testing has been manual, as the methods did not return anything useful; the controller is supposed to control the window, from the last examination, with the keyboard, which is easy to test in the browser.
+## Chapter 4
 
-### Testfall
-Lista de enskilda testfallen. **Fetmarkera** sådant som du själv fyllt i. En rad per testfall. Om ni använder vertyg för testning kan ni ha en bild här med testrapporten. Tänk på att kommunicera till mig. Vad fungerar?, vad fungerar inte? Hur är det testat? Vilka delar testas inte?
+The code has no comments, as the method names ought to be considered clear enough about what the code does. This was decided because comments in the code would be **reduntant**. Since comments were not **mandated**, there are no **noise comments** to clutter up the code. JSDoc comments were considered, but as this is practically **non-public code**, they would be without much value.
 
-Most of the methods, that the second-party programmer uses, do not have any meaningful output, except what is shown in the browser (size of window, etc.), so the the test cases listed are only of the GUI behaviour.
+## Chapter 5
 
-| Vad testas   | input              | output | utfall PASS/FAIL           |
-| ------------ | ------------------ | ------ | -------------------------- |
-| Maximisation | Alt+M              | N/A    | Window was maximised: PASS |
-| Minimisation | Alt+m              | N/A    | Window was minimised: PASS |
-| Restoration  | Alt+m              | N/A    | Window was restored: PASS  |
-| Closing      | Alt+c              | N/A    | Window was closed: PASS    |
-| Moving       | Alt+Arrow          | N/A    | Window was moved: PASS     |
-| Enlarging    | Ctrl+Arrow         | N/A    | Window was enlarged: PASS  |
-| Reducing     | Ctrl+Shift+Arrow   | N/A    | Window was reduced: PASS   |
+The general **class size** is pretty small in this project. **The newspaper metaphor** applies to most methods, except for the function objects, whose class name corresponds to the headline in the metaphor. As this project was developed by a single programmer, there were no **team rules**, but, as a general rule of thumb, JSLint recommendations were followed. In general, **vertical ordering** was not applicable, since no classes used their own methods, but it does show up in the main index file, where the event listeners are defined under their being added to the HTML element, so **indentation** for every new block, etc.
 
-## Kodkvalitetskrav
+## Chapter 6
 
-**Fetmarkera** de "regler" som används ur CC. Ni kan frångå tabellformat om ni vill. Skapa direktlänkar till er kod där det är lämpligt. Skriv så att jag kan förstå.
+The concept of **controllers** is mostly behavioural, thus they are implemented as **objects**, not **data structures**. The **law of Demeter** was followed to a T. The only thing resembling a **data structure**  is the *ModifierButtonCombination* class, whose only member is *movement*. This was done as a way not to repeat the movement number in the classes that inherit from it. Unfortunately, Javascript classes do not allow for **protected** members.
 
-### Namngivning
+## Chapter 7
 
-There are few instance variables in the project, which is why arguments will also be included in the list.
+In terms of **error handling**, no **exceptions** have been used in the project. Javascript itself makes use of exceptions, which is why it has been easy to **debug** the code without the use of any custom exceptions. Javascript methods return a lot of **null** "pointers" and the homegrown **undefined** value, which is considered bad practice, and therefore the code uses a lot of **optional chaining** and **nullish coalescing** operators to evade many bugs. The testing has been manual, as it is not a question of operating on data as much as it is a question of implementing behaviour.
 
-| Namn och förklaring  | Reflektion                                   |
-| -------------------  | ---------------------------------------------|
-| #activeWindow        | The only member of the controller. The con-  |
-|                      | troller uses it in both methods, making the  |
-|                      | class rather **cohesive**.                   |
-|                      |                                              |
-|                      |                                              |
-| movement             | Inherited from ModifierButtonCombination, all|
-|                      | its subclasses uses it. Having it as a       |
-|                      | member of the superclass, eliminates the     |
-|                      | need to define it in the subclasses, thus    |
-|                      | abiding the **DRY** principle. It is used by |
-|                      | all the only method of all of the subclasses,|
-|                      | making them **cohesive**. The fact that it is|
-|                      | declared in the superclass, and not passed   |
-|                      | along with the constructor, eleminates the   |
-|                      | need for a **triadic** constructor.
+## Chapter 8
 
-### Funktioner
+The project does not contain any **third-party code**, except for the Javascript library itself. Some of these methods and objects have been learned by doing **learning tests**, but the **documentation** has also been used.
 
-| Metodnamn och förklaring | Reflektion                                   |
-| ------------------------ | ---------------------------------------------|
-| setActiveWindow is       | **Monadic**. If the private variable is not  |
-| **explicit**. It sets the| set, the controller uses Elvis operators and |
-| private variable         | the like, as not to call undefined methods.  |
-| #activeWindow, on which  |                                              |
-| controller works.        |                                              |
-|                          |                                              |
-|                          |                                              |
-|                          |                                              |
-|                          |                                              |
-| handleKey respons to key | The terms are familiar to someone used to the|
-| input. It uses a lowlevel| **problem domain**, whose userbase includes  |
-| method to determine if   | developers. The methods are **niladic**.     |
-| the key is arrow, and an |                                              |
-| abstract factory to get  |                                              |
-| the right class according|                                              |
-| to the modifier button   |                                              |
-| pressed. It is the only  |                                              |
-| method in the class, but |                                              |
-| it delegates a lot to    |                                              |
-| other classes.           |                                              |
-|                                |                                        |
-| exec of the                    |                                        |
-| ModifierButtonCombinatedArrow- |                                        |
-| derived classes is very vague- |                                        |
-| ley named, because the classes |                                        |
-| are basically function objects.|                                        |
-|                                |                                        |
-| generate is a static method of | It is a very vague name for a method,  |
-| ModifierButtonCombinedArrow    | but this is often the case with func-  |
-| that constructs the correct    | tion objects.                          |
-| subclass according to the      |                                        |
-| button combination.            |                                        |
-|                                |                                        |
-| isArrow is a boolean function  | The method name clearly denotes a bool-|
-| which checks the number of the | ean method.                            |
-| key that was pressed. It is a  |                                        |
-| little lower-level than most   |                                        |
-| methods, but it eliminated the |                                        |
-| need for a switch statement.   |                                        |
-|                                |                                        |
-| isDigit is also a boolean func-| Similarly named and implemented as a-  |
-| tion.                          | bove.                                  |
-|                                |                                        |
-| isAltCombinatedReservedLetter  | The name again discloses that it is a  |
-| checks whether alt is down and | boolean function. It makes it clear    |
-| one of the reserved letters is | that it it checks if the alt key is    |
-| also down. It is case-sensi-   | down and if a reserved letter is also  |
-| tive, so it implicitly also    | pressed. It does not mention that it   |
-| checks whether shift is down.  | makes a difference whether shift is    |
-|                                | down, but that the different casings   |
-|                                | of 'm' and 'M' hints at this.          |
-|                                |                                        |
-| getSideByArrow returns the side| The term side is not used in HTML or   |
-| by the arrow down. It stores   | CSS to refer to left, right, top or    |
-| the sides in an array and re-  | bottom. Instead position is used. This |
-| turns the side according to the| has been an oversight, but the reader  |
-| number Javascript assigns the  | of the code ought to make sense of it. |
-| button.                        |                                        |
-|                                |                                        |
-| getSideOppositeArrow returns   | See above comment.                     |
-| the side opposite the arrow    |                                        |
-| pressed in a similar fashion.  |                                        |
-|                                |                                        |
-| getSignForMovementBySide gets  |                                        |
-| the sign (actually negative or |                                        |
-| positive 1, with which the     |                                        |
-| movement can be multiplied, to |                                        |
-| move the window according to   |                                        |
-| how the screen is oriented).   |                                        |
+## Chapter 9
 
+No **unit tests** are present in the code. This is much because of the things mentioned in the section about chapter 7. The code includes a lot of strings defined in the browser environment, both events and CSS properties, which could be considered **domain-specific language**. These strings could be tested in a unit test, in case anything has been misspelled, but misspellings could very well be present in the test code, the code being tested or both. Again, not much data is being computed, mostly just properties of the browser. The development has been **test-driven** insomuch as the behaviour implemented has been tested in the browser continuously.
 
-## Laborationsreflektion
-Most methods are **monadic**, but some of them, needing to work on the actual window, had to have the window as well as some event passed. The event object is not very **cohesive**, but any programmer writing in Javascript can wash his hands of it.
+## Chapter 10
 
-All methods follow the **law of Demeter**.
+The classes have been kept **small**; the biggest class is one filled with only static methods that are used for identification of buttons and CSS properties, but even that one is not much bigger than a regular computer monitor. All classes have high **cohesion**, owing much to the low amount of instance variables. The classes generally follow the **single responsibility principle**, which is most apparent in the *ModifierButtonCombination*-derived classes; they implement a very specific behaviour depending on the modifier button that is pressed.
+
+## Chapter 11
+
+The code **separates the construction of objects from using them**, which the *ModifierButtonAndArrowCombination* **factory** proves. The **domain-specific language** is mostly terms related to graphic user interfaces.
